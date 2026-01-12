@@ -1,0 +1,22 @@
+build/
+.env
+server-key.json
+*.pem
+
+# Hardhat files
+cache/
+artifacts/
+node_modules/
+coverage/
+coverage.json
+typechain/
+typechain-types/
+
+# Hardhat Ignition default folder for deployments against a local node
+ignition/deployments/chain-31337
+
+# Gas reports
+gas-report.txt
+
+# Logs
+*.log

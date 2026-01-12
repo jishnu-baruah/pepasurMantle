@@ -1,0 +1,50 @@
+{
+  "name": "contract",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "On-chain game logic for Pepasur, an EVM-based Mafia game with server-signed settlements, staking mechanics, and secure withdrawal patterns.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "hardhat test",
+    "compile": "hardhat compile",
+    "clean": "hardhat clean",
+    "deploy:u2u": "hardhat run scripts/deploy.js --network u2u",
+    "deploy:u2uTestnet": "hardhat run scripts/deploy.js --network u2uTestnet",
+    "deploy:celo": "hardhat run scripts/deploy.js --network celo",
+    "deploy:celoAlfajores": "hardhat run scripts/deploy.js --network celoAlfajores",
+    "deploy:celoSepolia": "hardhat run scripts/deploy.js --network celoSepolia",
+    "deploy:local": "hardhat run scripts/deploy.js --network hardhat",
+    "initialize": "hardhat run scripts/initialize.js",
+    "verify": "hardhat run scripts/verify.js",
+    "interact": "hardhat run scripts/interact.js",
+    "node": "hardhat node",
+    "game:run": "node scripts/run-continuous-complete-games-optimized.js --cycles 500 --delay 1000 --players 3",
+    "game:check": "node scripts/check-stuck-games.js",
+    "game:settle": "node scripts/settle-inprogress-games.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "@typechain/ethers-v6": "^0.5.0",
+    "@typechain/hardhat": "^9.0.0",
+    "chai": "^4.3.10",
+    "ethers": "^6.4.0",
+    "hardhat": "^2.22.0",
+    "hardhat-gas-reporter": "^1.0.8",
+    "solidity-coverage": "^0.8.0",
+    "typechain": "^8.3.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0",
+    "dotenv": "^17.2.3"
+  }
+}

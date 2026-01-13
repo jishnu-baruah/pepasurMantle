@@ -11,7 +11,23 @@ Pepasur is a multiplayer Mafia-style social deduction game built on EVM-compatib
 - EVM wallet (MetaMask, etc.)
 - Native tokens (U2U or CELO)
 
-### TL;DR Setup
+### 3. Configuration
+
+The project uses `.env` files for configuration.
+Copy `.env.example` to `.env` in the `backend/` and `contract/` directories, and `.env.local.example` to `.env.local` in the `frontend/` directory.
+
+**Key Configuration Variables:**
+- `DEPLOYER_PRIVATE_KEY`: Your wallet private key for deploying contracts
+- `SERVER_SIGNER_ADDRESS`: Address of the server wallet that signs settlements
+- `SERVER_PRIVATE_KEY`: Private key of the server wallet
+- `NEXT_PUBLIC_CONTRACT_ADDRESS`: Address of the deployed Pepasur contract
+
+**Active Deployment (Mantle Sepolia):**
+- **Contract Address:** `0x87Fc95Fc7B2350880d1e4Ca10B7c78BC56225a8b`
+- **Chain ID:** `5003` (Mantle Sepolia Testnet)
+- **Explorer:** [Mantle Sepolia Explorer](https://explorer.sepolia.mantle.xyz/address/0x87Fc95Fc7B2350880d1e4Ca10B7c78BC56225a8b)
+
+### 4. Running Locally
 ```bash
 # 1. Deploy contracts
 cd contract && npm install && npm run deploy

@@ -14,40 +14,11 @@ export default {
         },
     },
     networks: {
-        // U2U Network Mainnet
-        u2u: {
-            url: process.env.U2U_RPC_URL || "https://rpc-mainnet.uniultra.xyz",
-            chainId: 39,
+        // Mantle Sepolia Testnet
+        mantleSepolia: {
+            url: process.env.MANTLE_SEPOLIA_RPC_URL || "https://rpc.sepolia.mantle.xyz",
+            chainId: 5003,
             accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-            gasPrice: "auto",
-        },
-        // U2U Network Testnet (if available)
-        u2uTestnet: {
-            url: process.env.U2U_TESTNET_RPC_URL || "https://rpc-nebulas-testnet.uniultra.xyz",
-            chainId: 2484,
-            accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-            gasPrice: "auto",
-        },
-        // Celo Mainnet
-        celo: {
-            url: process.env.CELO_RPC_URL || "https://forno.celo.org",
-            chainId: 42220,
-            accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-            gasPrice: "auto",
-        },
-        // Celo Alfajores Testnet
-        celoAlfajores: {
-            url: process.env.CELO_ALFAJORES_RPC_URL || "https://alfajores-forno.celo-testnet.org",
-            chainId: 44787,
-            accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-            gasPrice: "auto",
-        },
-        // Celo Sepolia Testnet
-        celoSepolia: {
-            url: process.env.CELO_SEPOLIA_RPC_URL || "https://forno.celo-sepolia.celo-testnet.org",
-            chainId: 11142220,
-            accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-            gasPrice: "auto",
         },
         // Hardhat local network
         hardhat: {
@@ -62,35 +33,16 @@ export default {
     },
     etherscan: {
         apiKey: {
-            // U2U Network (if block explorer API is available)
-            u2u: process.env.U2U_EXPLORER_API_KEY || "not-needed",
-            // Celo
-            celo: process.env.CELO_EXPLORER_API_KEY || "not-needed",
-            celoAlfajores: process.env.CELO_EXPLORER_API_KEY || "not-needed",
+            // Mantle Sepolia
+            mantleSepolia: process.env.MANTLE_EXPLORER_API_KEY || "not-needed",
         },
         customChains: [
             {
-                network: "u2u",
-                chainId: 39,
+                network: "mantleSepolia",
+                chainId: 5003,
                 urls: {
-                    apiURL: "https://u2uscan.xyz/api",
-                    browserURL: "https://u2uscan.xyz",
-                },
-            },
-            {
-                network: "celo",
-                chainId: 42220,
-                urls: {
-                    apiURL: "https://explorer.celo.org/api",
-                    browserURL: "https://explorer.celo.org",
-                },
-            },
-            {
-                network: "celoAlfajores",
-                chainId: 44787,
-                urls: {
-                    apiURL: "https://alfajores.celoscan.io/api",
-                    browserURL: "https://alfajores.celoscan.io",
+                    apiURL: "https://explorer.sepolia.mantle.xyz/api",
+                    browserURL: "https://explorer.sepolia.mantle.xyz",
                 },
             },
         ],

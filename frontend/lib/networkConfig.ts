@@ -6,13 +6,12 @@
  */
 
 import { Chain } from 'viem';
-import { celo, celoAlfajores } from 'viem/chains';
-import { u2uMainnet, u2uTestnet } from './wagmi';
+import { mantleSepolia } from './wagmi';
 
 /**
  * Supported network identifiers
  */
-export type NetworkType = 'u2u' | 'u2u-testnet' | 'celo' | 'celo-alfajores';
+export type NetworkType = 'mantle-sepolia';
 
 /**
  * Network configuration interface
@@ -51,34 +50,15 @@ export interface NetworkConfig {
  * Get the current network type from environment variables
  */
 export function getCurrentNetwork(): NetworkType {
-    const network = process.env.NEXT_PUBLIC_NETWORK as NetworkType;
-
-    // Validate network type
-    const validNetworks: NetworkType[] = ['u2u', 'u2u-testnet', 'celo', 'celo-alfajores'];
-    if (!network || !validNetworks.includes(network)) {
-        console.warn(`Invalid network "${network}", defaulting to u2u-testnet`);
-        return 'u2u-testnet';
-    }
-
-    return network;
+    // Always return mantle-sepolia
+    return 'mantle-sepolia';
 }
 
 /**
  * Get the viem Chain object for a given network
  */
 export function getChainForNetwork(network: NetworkType): Chain {
-    switch (network) {
-        case 'u2u':
-            return u2uMainnet;
-        case 'u2u-testnet':
-            return u2uTestnet;
-        case 'celo':
-            return celo;
-        case 'celo-alfajores':
-            return celoAlfajores;
-        default:
-            return u2uTestnet;
-    }
+    return mantleSepolia;
 }
 
 /**
@@ -116,8 +96,6 @@ export function getNetworkConfig(): NetworkConfig {
  */
 export function validateNetworkConfig(): void {
     const requiredVars = [
-        'NEXT_PUBLIC_NETWORK',
-        'NEXT_PUBLIC_CHAIN_ID',
         'NEXT_PUBLIC_CONTRACT_ADDRESS',
         'NEXT_PUBLIC_API_URL',
     ];
@@ -137,15 +115,6 @@ export function validateNetworkConfig(): void {
         throw new Error(
             `Invalid contract address: ${contractAddress}\n` +
             'Contract address must be a valid Ethereum address (0x followed by 40 hexadecimal characters).'
-        );
-    }
-
-    // Validate chain ID matches network
-    const config = getNetworkConfig();
-    if (config.chainId !== config.chain.id) {
-        console.warn(
-            `Chain ID mismatch: NEXT_PUBLIC_CHAIN_ID (${config.chainId}) does not match ` +
-            `expected chain ID for ${config.network} (${config.chain.id})`
         );
     }
 }
@@ -196,8 +165,7 @@ export function formatTokenAmount(amount: string | bigint, decimals: number = 4)
  * Check if the current network is a testnet
  */
 export function isTestnet(): boolean {
-    const network = getCurrentNetwork();
-    return network === 'u2u-testnet' || network === 'celo-alfajores';
+    return true; // Mantle Sepolia is a testnet
 }
 
 /**
@@ -215,37 +183,13 @@ export function getNetworkInfo(network: NetworkType): Partial<NetworkConfig> {
     const chain = getChainForNetwork(network);
 
     const networkInfo: Record<NetworkType, Partial<NetworkConfig>> = {
-        'u2u': {
-            network: 'u2u',
-            chainId: 39,
-            networkName: 'U2U Network',
-            nativeTokenSymbol: 'U2U',
-            explorerUrl: 'https://u2uscan.xyz',
-            chain: u2uMainnet,
-        },
-        'u2u-testnet': {
-            network: 'u2u-testnet',
-            chainId: 2484,
-            networkName: 'U2U Nebulas Testnet',
-            nativeTokenSymbol: 'U2U',
-            explorerUrl: 'https://testnet.u2uscan.xyz',
-            chain: u2uTestnet,
-        },
-        'celo': {
-            network: 'celo',
-            chainId: 42220,
-            networkName: 'Celo',
-            nativeTokenSymbol: 'CELO',
-            explorerUrl: 'https://explorer.celo.org',
-            chain: celo,
-        },
-        'celo-alfajores': {
-            network: 'celo-alfajores',
-            chainId: 44787,
-            networkName: 'Celo Alfajores Testnet',
-            nativeTokenSymbol: 'CELO',
-            explorerUrl: 'https://alfajores.celoscan.io',
-            chain: celoAlfajores,
+        'mantle-sepolia': {
+            network: 'mantle-sepolia',
+            chainId: 5003,
+            networkName: 'Mantle Sepolia',
+            nativeTokenSymbol: 'MNT',
+            explorerUrl: 'https://explorer.sepolia.mantle.xyz',
+            chain: mantleSepolia,
         },
     };
 

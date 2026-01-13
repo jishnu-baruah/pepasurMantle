@@ -2,8 +2,8 @@
 
 ## 🎯 Current Status
 
-**Celo Mainnet**: ✅ Ready to deploy
-**Contract**: `0x9CA9147887D22D41FaA98B50533F79b7502572D7`
+**Mantle Sepolia Testnet**: ✅ Ready to deploy
+**Contract**: `0x87Fc95Fc7B2350880d1e4Ca10B7c78BC56225a8b`
 
 ## 🚀 Quick Setup
 
@@ -11,10 +11,10 @@
 
 **Backend** (`backend/.env`):
 ```env
-NETWORK_NAME=celo
-CHAIN_ID=42220
-CONTRACT_ADDRESS=0x9CA9147887D22D41FaA98B50533F79b7502572D7
-RPC_URL=https://forno.celo.org
+NETWORK_NAME=mantle-sepolia
+CHAIN_ID=5003
+CONTRACT_ADDRESS=0x87Fc95Fc7B2350880d1e4Ca10B7c78BC56225a8b
+RPC_URL=https://rpc.sepolia.mantle.xyz
 SERVER_PRIVATE_KEY=your_server_private_key
 ADMIN_PRIVATE_KEY=your_admin_private_key
 MONGODB_URI=your_mongodb_uri
@@ -23,14 +23,14 @@ ALLOWED_ORIGINS=http://localhost:3000
 
 **Frontend** (`frontend/.env.local`):
 ```env
-NEXT_PUBLIC_NETWORK=celo
-NEXT_PUBLIC_CHAIN_ID=42220
-NEXT_PUBLIC_CONTRACT_ADDRESS=0x9CA9147887D22D41FaA98B50533F79b7502572D7
-NEXT_PUBLIC_RPC_URL=https://forno.celo.org
+NEXT_PUBLIC_NETWORK=mantle-sepolia
+NEXT_PUBLIC_CHAIN_ID=5003
+NEXT_PUBLIC_CONTRACT_ADDRESS=0x87Fc95Fc7B2350880d1e4Ca10B7c78BC56225a8b
+NEXT_PUBLIC_RPC_URL=https://rpc.sepolia.mantle.xyz
 NEXT_PUBLIC_API_URL=http://localhost:3001
 NEXT_PUBLIC_SOCKET_URL=http://localhost:3001
-NEXT_PUBLIC_DEV_MODE=false
-NEXT_PUBLIC_FAUCET_ENABLED=false
+NEXT_PUBLIC_DEV_MODE=true
+NEXT_PUBLIC_FAUCET_ENABLED=true
 ```
 
 ### 2. Start Services
@@ -51,14 +51,14 @@ npm run dev
 ### 3. Test Locally
 
 - Open http://localhost:3000
-- Connect wallet to Celo Mainnet (Chain ID: 42220)
-- Create test game with small stake (0.01 CELO)
+- Connect wallet to Mantle Sepolia (Chain ID: 5003)
+- Create test game with small stake (0.01 MNT)
 
 ## 🔑 Important Info
 
-**Contract Address**: `0x9CA9147887D22D41FaA98B50533F79b7502572D7`
-**Network**: Celo Mainnet (Chain ID: 42220)
-**Explorer**: https://explorer.celo.org/address/0x9CA9147887D22D41FaA98B50533F79b7502572D7
+**Contract Address**: `0x87Fc95Fc7B2350880d1e4Ca10B7c78BC56225a8b`
+**Network**: Mantle Sepolia Testnet (Chain ID: 5003)
+**Explorer**: https://explorer.sepolia.mantle.xyz/address/0x87Fc95Fc7B2350880d1e4Ca10B7c78BC56225a8b
 
 ## ⚠️ Before Production
 

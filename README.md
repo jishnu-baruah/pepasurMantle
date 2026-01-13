@@ -9,7 +9,7 @@ Pepasur is a multiplayer Mafia-style social deduction game built on EVM-compatib
 ### Prerequisites
 - Node.js v18+
 - EVM wallet (MetaMask, etc.)
-- Native tokens (U2U or CELO)
+- Native tokens (MNT)
 
 ### 3. Configuration
 
@@ -50,18 +50,6 @@ pepasur/
 ├── contract/          # Solidity smart contracts
 └── docs/             # Documentation
 ```
-
-## 🌐 Supported Networks
-
-### U2U Network
-- **Chain ID**: 39
-- **RPC**: `https://rpc-mainnet.uniultra.xyz`
-- **Explorer**: `https://u2uscan.xyz`
-
-### Celo Network  
-- **Chain ID**: 42220
-- **RPC**: `https://forno.celo.org`
-- **Explorer**: `https://explorer.celo.org`
 
 ## 🛠️ Tech Stack
 

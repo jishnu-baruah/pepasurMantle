@@ -1,0 +1,7 @@
+{
+    "buildCommand": "npm run build",
+    "env": {
+        "NEXT_PUBLIC_API_URL": "https://pepasurmantle.onrender.com",
+        "NEXT_PUBLIC_SOCKET_URL": "https://pepasurmantle.onrender.com"
+    }
+}

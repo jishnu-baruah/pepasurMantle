@@ -55,6 +55,8 @@ class GameRewardService {
             console.error(`   This means not all players have staked on-chain yet.`);
             console.error(`   Players in backend: ${game.players.length}`);
             console.error(`   Players on-chain: ${gameInfo.players?.length || gameInfo.playerCount || 'unknown'}`);
+            console.error(`   Backend players:`, game.players);
+            console.error(`   On-chain players:`, gameInfo.players);
             return game;
           }
 
@@ -67,20 +69,44 @@ class GameRewardService {
             console.log(`⚠️ Game ${contractGameId} was cancelled on-chain, skipping settlement`);
             return game;
           }
+
+          if (status === 1) {
+            console.log(`✅ Game ${contractGameId} is InProgress on-chain, proceeding with settlement`);
+
+            // Verify player counts match
+            const onChainPlayerCount = gameInfo.players?.length || gameInfo.playerCount || 0;
+            const backendPlayerCount = game.players.length;
+
+            if (onChainPlayerCount !== backendPlayerCount) {
+              console.error(`❌ Player count mismatch!`);
+              console.error(`   On-chain: ${onChainPlayerCount} players`);
+              console.error(`   Backend: ${backendPlayerCount} players`);
+              console.error(`   On-chain players:`, gameInfo.players);
+              console.error(`   Backend players:`, game.players);
+              console.error(`   This indicates a sync issue - cannot settle safely`);
+              return game;
+            }
+
+            console.log(`✅ Player count verified: ${onChainPlayerCount} players match on both sides`);
+          }
         } catch (statusError) {
           console.error(`❌ Error checking on-chain game status:`, statusError.message);
-          console.error(`   Proceeding with settlement anyway`);
-          // Don't return early - proceed with settlement
+          console.error(`   CANNOT proceed with settlement - status verification is required`);
+          console.error(`   This prevents attempting to settle games that are not in InProgress status`);
+          return game; // Return early instead of proceeding
         }
       } else {
-        console.log(`⚠️ Blockchain service not available or getGameInfo not implemented, skipping status check`);
+        console.error(`❌ Blockchain service not available or getGameInfo not implemented`);
+        console.error(`   CANNOT proceed with settlement without status verification`);
+        return game; // Return early instead of proceeding
       }
 
       console.log(`💰 Using contract gameId: ${contractGameId}`);
-      console.log(`💰 Winners:`, winners);
-      console.log(`💰 Losers:`, losers);
+      console.log(`💰 Winners (${winners.length}):`, winners);
+      console.log(`💰 Losers (${losers.length}):`, losers);
       console.log(`💰 Game roles:`, game.roles);
       console.log(`💰 Eliminated players:`, game.eliminated || []);
+      console.log(`💰 Backend tracked players (${game.players.length}):`, game.players);
 
       // Check if game exists in staking service
       let stakingGame = this.stakingManager.stakingService.stakedGames.get(contractGameId);
